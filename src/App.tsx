@@ -1,8 +1,8 @@
-import { Button, Pagination } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 import { usePagination } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
-import { api, getPokemons } from "./config/pokenode";
+import { getPokemons } from "./config/pokenode";
 
 function App() {
   const limit = 6;
