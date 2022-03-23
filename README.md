@@ -8,6 +8,7 @@
 - [Vite](https://vitejs.dev/) - Como bundler para lidar com o build e tudo mais.
 - [React Query](https://react-query.tanstack.com) - Para lidar com o estado vindo de requisições.
 - [Pokenode-ts](https://github.com/Gabb-c/pokenode-ts) - Um wrapper para fazer as requisições a api
+- [React Faether](https://github.com/feathericons/react-feather) - Icones da coleção Faether
 
 ## Tarefas
 
