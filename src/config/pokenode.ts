@@ -13,9 +13,14 @@ async function fetchResources(resources: NamedAPIResourceList) {
   return result;
 }
 
-export async function getPokemons(offset?: number, limit?: number) {
+export async function getPokemons(limit = 20, page = 1) {
+  const offset = limit * page - limit;
+
   const resources = await api.listPokemons(offset, limit);
   const pokemons: Pokemon[] = await fetchResources(resources);
 
-  return pokemons;
+  const amountOfItems = resources.count;
+  const amountOfPages = Math.ceil(amountOfItems / limit);
+
+  return { pokemons, amountOfPages };
 }

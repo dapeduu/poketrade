@@ -1,16 +1,34 @@
-import { Button } from "@mantine/core";
+import { Button, Pagination } from "@mantine/core";
+import { usePagination } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { api, getPokemons } from "./config/pokenode";
 
 function App() {
-  const { data } = useQuery("pokemons", () => getPokemons());
+  const limit = 6;
+  const [page, setPageState] = useState(1);
+
+  const { data } = useQuery(
+    ["pokemons", page],
+    () => getPokemons(limit, page),
+    { keepPreviousData: true }
+  );
+  const { amountOfPages, pokemons } = data ?? {};
+
+  const { setPage } = usePagination({ total: amountOfPages ?? 0 });
+
+  function changePage(page: number) {
+    setPage(page);
+    setPageState(page);
+  }
 
   return (
     <div className="App">
-      {data?.map((pokemon) => (
+      {pokemons?.map((pokemon) => (
         <p key={pokemon.id}>{pokemon.name}</p>
       ))}
+
+      <Pagination total={amountOfPages ?? 0} onChange={changePage} />
     </div>
   );
 }
