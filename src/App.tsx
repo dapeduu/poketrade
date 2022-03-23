@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import { useState } from "react";
 
 function App() {
@@ -8,9 +9,9 @@ function App() {
       <header className="App-header">
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
+          <Button type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}
-          </button>
+          </Button>
         </p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
