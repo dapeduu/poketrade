@@ -1,3 +1,4 @@
+import { Pagination } from "@mantine/core";
 import { usePagination } from "@mantine/hooks";
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -24,6 +25,7 @@ export function usePokemons() {
   return {
     changePage,
     pokemons,
-    amountOfPages,
+    amountOfPages: amountOfPages ?? 0,
+    Pagination,
   };
 }

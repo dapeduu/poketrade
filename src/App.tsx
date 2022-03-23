@@ -1,8 +1,7 @@
-import { Pagination } from "@mantine/core";
 import { usePokemons } from "./hooks/usePokemons";
 
 function App() {
-  const { pokemons, amountOfPages, changePage } = usePokemons();
+  const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
 
   return (
     <div className="App">
@@ -10,7 +9,7 @@ function App() {
         <p key={pokemon.id}>{pokemon.name}</p>
       ))}
 
-      <Pagination total={amountOfPages ?? 0} onChange={changePage} />
+      <Pagination total={amountOfPages} onChange={changePage} />
     </div>
   );
 }
