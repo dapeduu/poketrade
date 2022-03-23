@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import { usePokemons } from "./hooks/usePokemons";
 import { ArrowLeft, ArrowRight } from "react-feather";
+import { PokemonCard } from "./components/PokemonCard";
 
 function App() {
   const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
@@ -33,50 +34,7 @@ function App() {
           ]}
         >
           {pokemons?.map((pokemon) => (
-            <Paper shadow="xl" p="md" key={pokemon.id}>
-              <Center>
-                <Group direction="column" grow>
-                  <Avatar
-                    src={pokemon.sprites.front_default ?? undefined}
-                    alt={`Imagem do pokemon ${pokemon.name}`}
-                    mx="auto"
-                    radius="xl"
-                    size="xl"
-                    sx={{
-                      background: "#F1F3F5",
-                    }}
-                  />
-                  <Title order={3} sx={{ textAlign: "center" }}>
-                    {pokemon.name}
-                  </Title>
-                  <Group mx="auto">
-                    {pokemon.types.map((type) => (
-                      <Badge>{type.type.name}</Badge>
-                    ))}
-                  </Group>
-
-                  <Group mx="auto" spacing={40}>
-                    <ActionIcon
-                      variant="filled"
-                      color="red"
-                      size="lg"
-                      aria-label="Adicionar pokemon ao vermelho"
-                    >
-                      <ArrowLeft />
-                    </ActionIcon>
-
-                    <ActionIcon
-                      variant="filled"
-                      color="blue"
-                      size="lg"
-                      aria-label="Adicionar pokemon ao azul"
-                    >
-                      <ArrowRight />
-                    </ActionIcon>
-                  </Group>
-                </Group>
-              </Center>
-            </Paper>
+            <PokemonCard pokemon={pokemon} />
           ))}
         </SimpleGrid>
 
