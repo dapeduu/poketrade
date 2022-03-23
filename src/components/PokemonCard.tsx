@@ -14,7 +14,14 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
   const { id, name, sprites, types } = pokemon;
 
   return (
-    <Paper shadow="xl" p="md" key={id}>
+    <Paper
+      withBorder
+      p="md"
+      key={id}
+      sx={{
+        minWidth: "15rem",
+      }}
+    >
       <Center>
         <Group direction="column" grow>
           <Avatar
