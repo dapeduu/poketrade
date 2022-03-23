@@ -1,30 +1,24 @@
-import {
-  ActionIcon,
-  Avatar,
-  Badge,
-  Button,
-  Center,
-  Container,
-  Group,
-  Paper,
-  SimpleGrid,
-  Title,
-} from "@mantine/core";
+import { Box, Center, Container, SimpleGrid } from "@mantine/core";
 import { usePokemons } from "./hooks/usePokemons";
-import { ArrowLeft, ArrowRight } from "react-feather";
 import { PokemonCard } from "./components/PokemonCard";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
 
   return (
-    <div className="App">
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        background: "#F8F9FA",
+      }}
+    >
+      <Navbar />
+
+      <Container size="lg">
         <SimpleGrid
           cols={3}
           breakpoints={[
@@ -42,7 +36,7 @@ function App() {
           <Pagination total={amountOfPages} onChange={changePage} />
         </Center>
       </Container>
-    </div>
+    </Box>
   );
 }
 
