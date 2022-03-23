@@ -7,11 +7,23 @@ import {
   Badge,
   ActionIcon,
 } from "@mantine/core";
+import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-state";
 import { Pokemon } from "pokenode-ts";
 import { ArrowLeft, ArrowRight } from "react-feather";
 
-export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
+export function PokemonCard({
+  pokemon,
+  redHandlers,
+  blueHandlers,
+}: {
+  pokemon: Pokemon;
+  redHandlers: UseListStateHandler<Pokemon>;
+  blueHandlers: UseListStateHandler<Pokemon>;
+}) {
   const { id, name, sprites, types } = pokemon;
+
+  const addToRedList = () => redHandlers.append(pokemon);
+  const addToBlueList = () => blueHandlers.append(pokemon);
 
   return (
     <Paper
@@ -39,7 +51,7 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
           </Title>
           <Group mx="auto">
             {types.map((type) => (
-              <Badge>{type.type.name}</Badge>
+              <Badge key={type.slot}>{type.type.name}</Badge>
             ))}
           </Group>
 
@@ -49,6 +61,7 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
               color="red"
               size="lg"
               aria-label="Adicionar pokemon ao vermelho"
+              onClick={addToRedList}
             >
               <ArrowLeft />
             </ActionIcon>
@@ -58,6 +71,7 @@ export function PokemonCard({ pokemon }: { pokemon: Pokemon }) {
               color="blue"
               size="lg"
               aria-label="Adicionar pokemon ao azul"
+              onClick={addToBlueList}
             >
               <ArrowRight />
             </ActionIcon>

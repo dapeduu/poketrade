@@ -2,14 +2,19 @@ import { Box, Center, Container, SimpleGrid } from "@mantine/core";
 import { usePokemons } from "./hooks/usePokemons";
 import { PokemonCard } from "./components/PokemonCard";
 import { Navbar } from "./components/Navbar";
+import { useListState } from "@mantine/hooks";
+import { Pokemon } from "pokenode-ts";
+import { TradeArea } from "./components/TradeArea";
 
 function App() {
   const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
+  const [redPokemonsList, redHandlers] = useListState<Pokemon>([]);
+  const [bluePokemonsList, blueHandlers] = useListState<Pokemon>([]);
 
   return (
     <Box
       sx={{
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -17,6 +22,13 @@ function App() {
       }}
     >
       <Navbar />
+
+      <TradeArea
+        redPokemonsList={redPokemonsList}
+        bluePokemonsList={bluePokemonsList}
+        blueHandlers={blueHandlers}
+        redHandlers={redHandlers}
+      />
 
       <Container size="lg">
         <SimpleGrid
@@ -28,7 +40,12 @@ function App() {
           ]}
         >
           {pokemons?.map((pokemon) => (
-            <PokemonCard pokemon={pokemon} />
+            <PokemonCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              redHandlers={redHandlers}
+              blueHandlers={blueHandlers}
+            />
           ))}
         </SimpleGrid>
 
