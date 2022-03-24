@@ -14,7 +14,11 @@ import {
 import { useMediaQuery, useToggle } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Clock } from "react-feather";
-import { getTradeHistory, HistoryTradeDataType } from "../config/trade";
+import {
+  clearTradeHistory,
+  getTradeHistory,
+  HistoryTradeDataType,
+} from "../config/trade";
 
 function HistoryModal() {
   const maxWidth500px = useMediaQuery("(max-width: 500px)");
@@ -48,9 +52,26 @@ function HistoryModal() {
         title="Histórico de Trocas"
         size="lg"
       >
+        <Group position="center" my="lg">
+          <Button
+            onClick={() => {
+              clearTradeHistory();
+              setTradeHistory([]);
+            }}
+          >
+            Limpar Histórico
+          </Button>
+        </Group>
+
         <Group direction="column">
           {tradeHistory?.map((data) => (
-            <Paper withBorder p="md">
+            <Paper
+              withBorder
+              p="md"
+              style={{
+                width: "100%",
+              }}
+            >
               <Title order={2}>Data da Troca: {data.tradeDate}</Title>
               <Group>
                 <PokemonsList

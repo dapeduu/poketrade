@@ -69,3 +69,7 @@ export function storeToTradeHistory(
 
   localStorage.setItem("tradeHistory", JSON.stringify(history));
 }
+
+export function clearTradeHistory() {
+  localStorage.setItem("tradeHistory", "[]");
+}
