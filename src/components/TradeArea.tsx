@@ -7,7 +7,9 @@ import {
   Box,
   Text,
   ActionIcon,
+  Button,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-state";
 import { Pokemon } from "pokenode-ts";
 import { X } from "react-feather";
@@ -26,6 +28,7 @@ export function TradeArea({
   redHandlers,
   blueHandlers,
 }: TradeAreaProps) {
+  const matches = useMediaQuery("(max-width: 1000px)");
   const redPokemonsXp = redPokemonsList.reduce(getTotalXpReducer, 0);
   const bluePokemonsXp = bluePokemonsList.reduce(getTotalXpReducer, 0);
 
@@ -37,35 +40,69 @@ export function TradeArea({
   };
 
   return (
-    <Container
-      size="lg"
-      sx={{
-        width: "100%",
-        flex: "1",
-        display: "flex",
-        border: "1px solid #CED4DA",
-      }}
-      my="xs"
-      px={0}
-    >
-      <PokemonsArea
-        pokemons={redPokemonsList}
-        xp={redPokemonsXp}
-        color="red"
-        removeFromList={removeFromList}
-        redHandlers={redHandlers}
-        blueHandlers={blueHandlers}
-      />
+    <>
+      <Container
+        size="lg"
+        sx={{
+          position: "relative",
+          width: "100%",
+          flex: "1",
+          display: "flex",
+          border: "1px solid #CED4DA",
+        }}
+        my="xs"
+        px={0}
+      >
+        <PokemonsArea
+          pokemons={redPokemonsList}
+          xp={redPokemonsXp}
+          color="red"
+          removeFromList={removeFromList}
+          redHandlers={redHandlers}
+          blueHandlers={blueHandlers}
+        />
 
-      <PokemonsArea
-        pokemons={bluePokemonsList}
-        xp={bluePokemonsXp}
-        color="blue"
-        removeFromList={removeFromList}
-        redHandlers={redHandlers}
-        blueHandlers={blueHandlers}
-      />
-    </Container>
+        {!matches && (
+          <Button
+            sx={{
+              position: "absolute",
+              width: "100px",
+              height: "44px",
+              left: "50%",
+              marginLeft: "-50px",
+              top: "50%",
+              marginTop: "-22px",
+            }}
+            color="red"
+          >
+            Trocar!
+          </Button>
+        )}
+
+        <PokemonsArea
+          pokemons={bluePokemonsList}
+          xp={bluePokemonsXp}
+          color="blue"
+          removeFromList={removeFromList}
+          redHandlers={redHandlers}
+          blueHandlers={blueHandlers}
+        />
+      </Container>
+
+      {matches && (
+        <Button
+          sx={{
+            width: "100px",
+            height: "44px",
+            alignSelf: "center",
+          }}
+          mb="xs"
+          color="red"
+        >
+          Trocar!
+        </Button>
+      )}
+    </>
   );
 }
 
@@ -89,6 +126,8 @@ function PokemonsArea({
   redHandlers,
   blueHandlers,
 }: PokemonsAreaProps) {
+  const matches = useMediaQuery("(max-width: 1000px)");
+
   const hexColor = {
     red: "#FFA8A8",
     blue: "#74C0FC",
@@ -109,6 +148,8 @@ function PokemonsArea({
         flexDirection: "column",
       }}
       p="xs"
+      pl={color === "blue" && !matches ? "4rem" : undefined}
+      pr={color === "red" && !matches ? "4rem" : undefined}
     >
       <SimpleGrid
         cols={3}
