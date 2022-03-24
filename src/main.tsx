@@ -1,4 +1,5 @@
 import { Global } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClientProvider } from "react-query";
@@ -17,7 +18,9 @@ ReactDOM.render(
           },
         }}
       />
-      <App />
+      <NotificationsProvider>
+        <App />
+      </NotificationsProvider>
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")

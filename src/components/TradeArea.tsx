@@ -11,9 +11,10 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-state";
+import { useNotifications } from "@mantine/notifications";
 import { Pokemon } from "pokenode-ts";
-import { X } from "react-feather";
-import { getTotalXpReducer } from "../config/trade";
+import { ThumbsDown, ThumbsUp, X, XCircle } from "react-feather";
+import { canTrade, getTotalXpReducer } from "../config/trade";
 
 type TradeAreaProps = {
   redPokemonsList: Pokemon[];
@@ -31,12 +32,36 @@ export function TradeArea({
   const maxWidth1000px = useMediaQuery("(max-width: 1000px)");
   const redPokemonsXp = redPokemonsList.reduce(getTotalXpReducer, 0);
   const bluePokemonsXp = bluePokemonsList.reduce(getTotalXpReducer, 0);
+  const notifications = useNotifications();
 
   const removeFromList = (
     handler: UseListStateHandler<Pokemon>,
     index: number
   ) => {
     handler.remove(index);
+  };
+
+  const handleTrade = () => {
+    const tradeResult = canTrade(redPokemonsList, bluePokemonsList);
+
+    if (tradeResult) {
+      notifications.showNotification({
+        title: "Sucesso!",
+        message: "Troca justa.",
+        color: "green",
+        icon: <ThumbsUp size="1rem" />,
+      });
+
+      redHandlers.setState([]);
+      blueHandlers.setState([]);
+    } else {
+      notifications.showNotification({
+        title: "Erro!",
+        message: "Essa troca não é justa.",
+        color: "red",
+        icon: <ThumbsDown size="1rem" />,
+      });
+    }
   };
 
   return (
@@ -74,6 +99,7 @@ export function TradeArea({
               marginTop: "-22px",
             }}
             color="red"
+            onClick={handleTrade}
           >
             Trocar!
           </Button>
@@ -98,6 +124,7 @@ export function TradeArea({
           }}
           mb="xs"
           color="red"
+          onClick={handleTrade}
         >
           Trocar!
         </Button>
