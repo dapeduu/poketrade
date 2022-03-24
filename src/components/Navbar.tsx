@@ -39,8 +39,6 @@ export function Navbar() {
           <PokeballIcon />
         </Box>
 
-        <TextInput placeholder="Pesquisar Pokémon" />
-
         <HistoryModal />
       </Container>
     </Box>
