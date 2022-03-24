@@ -18,7 +18,7 @@ function App() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#F8F9FA",
+        background: "#DEE2E6",
       }}
     >
       <Navbar />
