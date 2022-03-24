@@ -28,7 +28,7 @@ export function TradeArea({
   redHandlers,
   blueHandlers,
 }: TradeAreaProps) {
-  const matches = useMediaQuery("(max-width: 1000px)");
+  const maxWidth1000px = useMediaQuery("(max-width: 1000px)");
   const redPokemonsXp = redPokemonsList.reduce(getTotalXpReducer, 0);
   const bluePokemonsXp = bluePokemonsList.reduce(getTotalXpReducer, 0);
 
@@ -62,7 +62,7 @@ export function TradeArea({
           blueHandlers={blueHandlers}
         />
 
-        {!matches && (
+        {!maxWidth1000px && (
           <Button
             sx={{
               position: "absolute",
@@ -89,7 +89,7 @@ export function TradeArea({
         />
       </Container>
 
-      {matches && (
+      {maxWidth1000px && (
         <Button
           sx={{
             width: "100px",
@@ -126,7 +126,7 @@ function PokemonsArea({
   redHandlers,
   blueHandlers,
 }: PokemonsAreaProps) {
-  const matches = useMediaQuery("(max-width: 1000px)");
+  const maxWidth1000px = useMediaQuery("(max-width: 1000px)");
 
   const hexColor = {
     red: "#FFA8A8",
@@ -148,8 +148,8 @@ function PokemonsArea({
         flexDirection: "column",
       }}
       p="xs"
-      pl={color === "blue" && !matches ? "4rem" : undefined}
-      pr={color === "red" && !matches ? "4rem" : undefined}
+      pl={color === "blue" && !maxWidth1000px ? "4rem" : undefined}
+      pr={color === "red" && !maxWidth1000px ? "4rem" : undefined}
     >
       <SimpleGrid
         cols={3}
