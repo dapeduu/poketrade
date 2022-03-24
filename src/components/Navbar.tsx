@@ -1,9 +1,19 @@
-import { TextInput, Button, Box, Container, AspectRatio } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  Box,
+  Container,
+  AspectRatio,
+  ActionIcon,
+} from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { Clock } from "react-feather";
 // @ts-ignore
 import PokeballIcon from "../assets/pokeball.svg?component";
 
 export function Navbar() {
+  const maxWidth500px = useMediaQuery("(max-width: 500px)");
+
   return (
     <Box
       sx={{
@@ -31,9 +41,16 @@ export function Navbar() {
         </Box>
 
         <TextInput placeholder="Pesquisar Pokémon" />
-        <Button leftIcon={<Clock />} variant="outline">
-          Histórico
-        </Button>
+
+        {maxWidth500px ? (
+          <ActionIcon variant="outline" color="blue" size="lg">
+            <Clock />
+          </ActionIcon>
+        ) : (
+          <Button leftIcon={<Clock />} variant="outline">
+            Histórico
+          </Button>
+        )}
       </Container>
     </Box>
   );

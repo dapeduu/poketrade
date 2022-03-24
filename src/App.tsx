@@ -2,7 +2,7 @@ import { Box, Center, Container, SimpleGrid } from "@mantine/core";
 import { usePokemons } from "./hooks/usePokemons";
 import { PokemonCard } from "./components/PokemonCard";
 import { Navbar } from "./components/Navbar";
-import { useListState } from "@mantine/hooks";
+import { useListState, useMediaQuery } from "@mantine/hooks";
 import { Pokemon } from "pokenode-ts";
 import { TradeArea } from "./components/TradeArea";
 
@@ -10,6 +10,7 @@ function App() {
   const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
   const [redPokemonsList, redHandlers] = useListState<Pokemon>([]);
   const [bluePokemonsList, blueHandlers] = useListState<Pokemon>([]);
+  const maxWidth420px = useMediaQuery("(max-width: 420px)");
 
   return (
     <Box
@@ -50,7 +51,12 @@ function App() {
         </SimpleGrid>
 
         <Center my={20}>
-          <Pagination total={amountOfPages} onChange={changePage} />
+          <Pagination
+            total={amountOfPages}
+            onChange={changePage}
+            withControls={!maxWidth420px}
+            size={maxWidth420px ? "sm" : "md"}
+          />
         </Center>
       </Container>
     </Box>
