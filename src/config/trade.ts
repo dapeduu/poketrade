@@ -19,7 +19,7 @@ export function canTrade(
   return result;
 }
 
-type historyTradeDataType = {
+export type HistoryTradeDataType = {
   tradeDate: string;
   redPokemons: string[];
   bluePokemons: string[];
@@ -27,7 +27,7 @@ type historyTradeDataType = {
   bluePokemonsXp: number;
 };
 
-export function getTradeHistory(): historyTradeDataType[] {
+export function getTradeHistory(): HistoryTradeDataType[] {
   const history = JSON.parse(localStorage.getItem("tradeHistory") ?? "[]");
 
   return history;
@@ -63,7 +63,7 @@ export function storeToTradeHistory(
     bluePokemonsList
   );
 
-  const history: historyTradeDataType[] = getTradeHistory();
+  const history: HistoryTradeDataType[] = getTradeHistory();
 
   history.push(historyDataToAdd);
 

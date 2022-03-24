@@ -10,10 +10,9 @@ import { useMediaQuery } from "@mantine/hooks";
 import { Clock } from "react-feather";
 // @ts-ignore
 import PokeballIcon from "../assets/pokeball.svg?component";
+import HistoryModal from "./HistoryModal";
 
 export function Navbar() {
-  const maxWidth500px = useMediaQuery("(max-width: 500px)");
-
   return (
     <Box
       sx={{
@@ -42,15 +41,7 @@ export function Navbar() {
 
         <TextInput placeholder="Pesquisar Pokémon" />
 
-        {maxWidth500px ? (
-          <ActionIcon variant="outline" color="blue" size="lg">
-            <Clock />
-          </ActionIcon>
-        ) : (
-          <Button leftIcon={<Clock />} variant="outline">
-            Histórico
-          </Button>
-        )}
+        <HistoryModal />
       </Container>
     </Box>
   );

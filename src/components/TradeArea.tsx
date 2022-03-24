@@ -14,7 +14,7 @@ import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-
 import { useNotifications } from "@mantine/notifications";
 import { Pokemon } from "pokenode-ts";
 import { Info, ThumbsDown, ThumbsUp, X } from "react-feather";
-import { canTrade, getTotalXp } from "../config/trade";
+import { canTrade, getTotalXp, storeToTradeHistory } from "../config/trade";
 
 type TradeAreaProps = {
   redPokemonsList: Pokemon[];
@@ -61,6 +61,8 @@ export function TradeArea({
         color: "green",
         icon: <ThumbsUp size="1rem" />,
       });
+
+      storeToTradeHistory(redPokemonsList, bluePokemonsList);
 
       redHandlers.setState([]);
       blueHandlers.setState([]);
