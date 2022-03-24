@@ -14,7 +14,7 @@ import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-
 import { useNotifications } from "@mantine/notifications";
 import { Pokemon } from "pokenode-ts";
 import { Info, ThumbsDown, ThumbsUp, X } from "react-feather";
-import { canTrade, getTotalXpReducer } from "../config/trade";
+import { canTrade, getTotalXp } from "../config/trade";
 
 type TradeAreaProps = {
   redPokemonsList: Pokemon[];
@@ -30,8 +30,8 @@ export function TradeArea({
   blueHandlers,
 }: TradeAreaProps) {
   const maxWidth1000px = useMediaQuery("(max-width: 1000px)");
-  const redPokemonsXp = redPokemonsList.reduce(getTotalXpReducer, 0);
-  const bluePokemonsXp = bluePokemonsList.reduce(getTotalXpReducer, 0);
+  const redPokemonsXp = getTotalXp(redPokemonsList);
+  const bluePokemonsXp = getTotalXp(bluePokemonsList);
   const notifications = useNotifications();
 
   const removeFromList = (
