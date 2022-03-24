@@ -7,9 +7,9 @@ import {
   Badge,
   ActionIcon,
 } from "@mantine/core";
-import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-state";
 import { Pokemon } from "pokenode-ts";
 import { ArrowLeft, ArrowRight } from "react-feather";
+import { labelColors } from "../config/labelColors";
 
 export function PokemonCard({
   pokemon,
@@ -54,7 +54,12 @@ export function PokemonCard({
           </Title>
           <Group mx="auto">
             {types.map((type) => (
-              <Badge key={type.slot}>{type.type.name}</Badge>
+              <Badge
+                color={labelColors[type.type.name as keyof typeof labelColors]}
+                key={type.slot}
+              >
+                {type.type.name}
+              </Badge>
             ))}
           </Group>
 
