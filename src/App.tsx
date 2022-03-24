@@ -5,12 +5,38 @@ import { Navbar } from "./components/Navbar";
 import { useListState, useMediaQuery } from "@mantine/hooks";
 import { Pokemon } from "pokenode-ts";
 import { TradeArea } from "./components/TradeArea";
+import { useNotifications } from "@mantine/notifications";
+import { XCircle } from "react-feather";
 
 function App() {
   const { pokemons, amountOfPages, changePage, Pagination } = usePokemons();
   const [redPokemonsList, redHandlers] = useListState<Pokemon>([]);
   const [bluePokemonsList, blueHandlers] = useListState<Pokemon>([]);
   const maxWidth420px = useMediaQuery("(max-width: 420px)");
+  const notifications = useNotifications();
+
+  const addToList = (pokemon: Pokemon, listColor: "red" | "blue") => {
+    const list = {
+      red: redPokemonsList,
+      blue: bluePokemonsList,
+    };
+    const handler = {
+      red: redHandlers,
+      blue: blueHandlers,
+    };
+
+    if (list[listColor].length >= 6) {
+      notifications.showNotification({
+        title: "Erro!",
+        message: "Só é possível adicionar no máximo 6 pokémons.",
+        color: "red",
+        icon: <XCircle />,
+      });
+      return;
+    }
+
+    handler[listColor].append(pokemon);
+  };
 
   return (
     <Box
@@ -44,8 +70,7 @@ function App() {
             <PokemonCard
               key={pokemon.id}
               pokemon={pokemon}
-              redHandlers={redHandlers}
-              blueHandlers={blueHandlers}
+              addToList={addToList}
             />
           ))}
         </SimpleGrid>

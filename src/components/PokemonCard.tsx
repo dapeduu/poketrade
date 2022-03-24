@@ -13,17 +13,15 @@ import { ArrowLeft, ArrowRight } from "react-feather";
 
 export function PokemonCard({
   pokemon,
-  redHandlers,
-  blueHandlers,
+  addToList,
 }: {
   pokemon: Pokemon;
-  redHandlers: UseListStateHandler<Pokemon>;
-  blueHandlers: UseListStateHandler<Pokemon>;
+  addToList: (pokemon: Pokemon, listColor: "red" | "blue") => void;
 }) {
   const { id, name, sprites, types } = pokemon;
 
-  const addToRedList = () => redHandlers.append(pokemon);
-  const addToBlueList = () => blueHandlers.append(pokemon);
+  const addToRedList = () => addToList(pokemon, "red");
+  const addToBlueList = () => addToList(pokemon, "blue");
 
   return (
     <Paper
