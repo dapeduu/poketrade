@@ -64,13 +64,14 @@ function HistoryModal() {
         </Group>
 
         <Group direction="column">
-          {tradeHistory?.map((data) => (
+          {tradeHistory?.map((data, index) => (
             <Paper
               withBorder
               p="md"
               style={{
                 width: "100%",
               }}
+              key={index}
             >
               <Title order={2}>Data da Troca: {data.tradeDate}</Title>
               <Group>
