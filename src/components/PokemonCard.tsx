@@ -44,7 +44,12 @@ export function PokemonCard({
               background: "#F1F3F5",
             }}
           />
-          <Title order={3} sx={{ textAlign: "center" }}>
+          <Title
+            order={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
             {name}
           </Title>
           <Group mx="auto">

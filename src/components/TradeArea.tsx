@@ -216,9 +216,19 @@ function PokemonsArea({
               radius="xl"
               size="xl"
             />
-            <Text>
-              <Center>{pokemon.name}</Center>
-            </Text>
+            <Center>
+              <Text
+                style={{
+                  textAlign: "center",
+                  width: "15ch",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {pokemon.name}
+              </Text>
+            </Center>
 
             <ActionIcon
               color="red"
