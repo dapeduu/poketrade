@@ -14,7 +14,7 @@ export function canTrade(
   const pokemonList1Xp = getTotalXp(pokemonList1);
   const pokemonList2Xp = getTotalXp(pokemonList2);
 
-  const result = pokemonList1Xp - pokemonList2Xp <= 1000;
+  const result = Math.abs(pokemonList1Xp - pokemonList2Xp) <= 1000;
 
   return result;
 }
