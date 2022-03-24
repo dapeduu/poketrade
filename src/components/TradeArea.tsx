@@ -13,7 +13,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { UseListStateHandler } from "@mantine/hooks/lib/use-list-state/use-list-state";
 import { useNotifications } from "@mantine/notifications";
 import { Pokemon } from "pokenode-ts";
-import { ThumbsDown, ThumbsUp, X, XCircle } from "react-feather";
+import { Info, ThumbsDown, ThumbsUp, X } from "react-feather";
 import { canTrade, getTotalXpReducer } from "../config/trade";
 
 type TradeAreaProps = {
@@ -42,6 +42,16 @@ export function TradeArea({
   };
 
   const handleTrade = () => {
+    if (redPokemonsList.length <= 0 || bluePokemonsList.length <= 0) {
+      notifications.showNotification({
+        title: "Erro!",
+        message: "As duas listas devem conter ao menos 1 pokémon.",
+        icon: <Info />,
+      });
+
+      return;
+    }
+
     const tradeResult = canTrade(redPokemonsList, bluePokemonsList);
 
     if (tradeResult) {
