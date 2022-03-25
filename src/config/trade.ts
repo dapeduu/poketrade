@@ -11,8 +11,8 @@ export function canTrade(
   pokemonList1: Pokemon[],
   pokemonList2: Pokemon[]
 ): boolean {
-  const pokemonList1Xp = getTotalXp(pokemonList1);
-  const pokemonList2Xp = getTotalXp(pokemonList2);
+  const pokemonList1Xp = getTotalXp(pokemonList1) / pokemonList1.length;
+  const pokemonList2Xp = getTotalXp(pokemonList2) / pokemonList2.length;
 
   const result = Math.abs(pokemonList1Xp - pokemonList2Xp) <= 1000;
 
@@ -40,7 +40,7 @@ function formatHistoryTradeData(
   const tradeDate = new Date().toLocaleDateString("pt-br");
 
   const redPokemons = redPokemonsList.map((pokemon) => pokemon.name);
-  const bluePokemons = redPokemonsList.map((pokemon) => pokemon.name);
+  const bluePokemons = bluePokemonsList.map((pokemon) => pokemon.name);
 
   const redPokemonsXp = getTotalXp(redPokemonsList);
   const bluePokemonsXp = getTotalXp(bluePokemonsList);
