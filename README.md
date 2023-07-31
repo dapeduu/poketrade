@@ -1,5 +1,7 @@
 # Poketrade
 
+Desafio técnico relazido para entrar na BXBlue (que agora é Picpay).
+
 ## [Design (Feito no whimsical)](https://whimsical.com/poketrade-64ZqShfQEgV1mCqoYU9Gxn)
 
 ## Tecnologias
